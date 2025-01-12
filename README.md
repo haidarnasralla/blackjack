@@ -26,7 +26,7 @@ This project is a JavaScript implementation of the popular card game Blackjack. 
 1. Clone the repository:
 
    ```bash
-   git clone [<repository-url>](https://github.com/haidarnasralla/blackjack.git)
+   git clone https://github.com/haidarnasralla/blackjack.git
    cd blackjack
    ```
 
