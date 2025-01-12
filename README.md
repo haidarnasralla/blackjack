@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a JavaScript implementation of the popular card game Blackjack. It is a fully functional game engine with a deck of cards, players, a dealer, and scoring mechanics. The game logic is thoroughly tested using Jest, and it was built using Test-Driven Development (TDD) to ensure clean, maintainable, and reliable code.
+This project is a JavaScript implementation of Blackjack. It is a fully functional game engine with a deck of cards, players, a dealer, and scoring mechanics. The game logic is thoroughly tested using Jest, and it was built using Test-Driven Development (TDD) to ensure clean, maintainable, and reliable code.
 
 ## Features
 
@@ -26,7 +26,7 @@ This project is a JavaScript implementation of the popular card game Blackjack. 
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/haidarnasralla/blackjack.git
    cd blackjack
    ```
 
