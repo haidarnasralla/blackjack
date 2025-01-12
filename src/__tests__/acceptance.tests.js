@@ -121,7 +121,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
             card3 = new Card(10, 'Clubs')
         });
     
-        it('marks the player\'s hand as bust when their score is 30', () => {
+        it('marks the player\'s hand as bust when their score is 30, sets result to \'dealer_wins\' on standing', () => {
             player.takeCard(card1, card2, card3);
             game.stand(player)
             expect(player.getScore()).toBe(30);
@@ -129,7 +129,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
             expect(game.result).toBe('dealer_wins')
         });
     
-        it('marks the dealer\'s hand as bust when their score is 30', () => {
+        it('marks the dealer\'s hand as bust when their score is 30, sets result to \'player_wins\' on standing', () => {
             dealer.takeCard(card1, card2, card3);
             game.stand(dealer)
             expect(dealer.getScore()).toBe(30);
