@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a JavaScript, object-oriented implementation of Blackjack. It is a fully functional game engine with a deck of cards, players, a dealer, and scoring mechanics. The game logic is thoroughly tested using Jest, and it was built using Test-Driven Development (TDD) to ensure clean, maintainable, and reliable code.
+This project is an object-oriented implementation of Blackjack written in JavaScript. It is a fully functional game engine with a deck of cards, players, a dealer, and scoring mechanics. The game logic is thoroughly tested using Jest, and it was built using Test-Driven Development (TDD) to ensure clean, maintainable, and reliable code.
 
 ## Features
 
