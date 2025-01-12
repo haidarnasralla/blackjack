@@ -11,7 +11,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
         dealer = game.dealer
     })
 
-    describe('Given I play a game of blackjack, when I am dealt my opening hand, then I have two cards', () => {
+    describe('1. Given I play a game of blackjack, when I am dealt my opening hand, then I have two cards', () => {
         it('deals two cards to the player at the start of the game', () => {
             expect(player.getHand().length).toBe(0)
             game.dealFirstHand()
@@ -24,7 +24,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
         });
     });
 
-    describe('Given I have a valid hand of cards, when I choose to "hit", then I receive another card and my score is updated', () => {
+    describe('2. Given I have a valid hand of cards, when I choose to "hit", then I receive another card and my score is updated', () => {
         let card1, card2
     
         beforeEach(() => {
@@ -60,7 +60,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
     });
     
 
-    describe('Given I have a valid hand of cards, when I choose to "stand", then I receive no further cards and my score is evaluated', () => {
+    describe('3. Given I have a valid hand of cards, when I choose to "stand", then I receive no further cards and my score is evaluated', () => {
         let card1, card2, calculateWinnerSpy
     
         beforeEach(() => {
@@ -90,7 +90,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
         });
     });
 
-    describe('Given my score is updated or evaluated, when it is 21 or less, then I have a valid hand', () => {
+    describe('4. Given my score is updated or evaluated, when it is 21 or less, then I have a valid hand', () => {
         let card1, card2
     
         beforeEach(() => {
@@ -112,7 +112,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
     });
 
     
-    describe('Given my score is updated, when it is 22 or more, then I am "bust" and do not have a valid hand', () => {
+    describe('5. Given my score is updated, when it is 22 or more, then I am "bust" and do not have a valid hand', () => {
         let card1, card2, card3
     
         beforeEach(() => {
@@ -134,7 +134,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
         });
     });
 
-    describe('Given I have a king and an ace, when my score is evaluated, then my score is 21', () => {
+    describe('6. Given I have a king and an ace, when my score is evaluated, then my score is 21', () => {
         let card1, card2
     
         beforeEach(() => {
@@ -153,7 +153,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
         });
     });
 
-    describe('Given I have a king, a queen, and an ace, when my score is evaluated, then my score is 21', () => {
+    describe('7. Given I have a king, a queen, and an ace, when my score is evaluated, then my score is 21', () => {
         let card1, card2, card3
     
         beforeEach(() => {
@@ -173,7 +173,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
         });
     });
 
-    describe('Given I have a nine, an ace, and another ace, when my score is evaluated, then my score is 21', () => {
+    describe('8. Given I have a nine, an ace, and another ace, when my score is evaluated, then my score is 21', () => {
         let card1, card2, card3
     
         beforeEach(() => {
