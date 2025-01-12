@@ -26,18 +26,12 @@ class Game {
     }
 
     hit(player) {
-
-        const playerName = player.name.toLowerCase()
-
         if (player === this.dealer) {
-            while (player.needsToDraw()) {
-                player.takeCard(...this.deck.deal(1))
+            while (this.dealer.needsToDraw()) {
+                this.dealer.takeCard(...this.deck.deal(1))
             }
         } else {
             player.takeCard(...this.deck.deal(1))
-        }
-        if (player.hand.isBust()) {
-            this.result = `${playerName}_bust`
         }
     }
 
@@ -49,15 +43,23 @@ class Game {
     }
 
     calculateWinner() {
+        const isPlayerBust = this.player.isBust()
+        const isDealerBust = this.dealer.isBust()
         const playerScore = this.player.getScore()
         const dealerScore = this.dealer.getScore()
     
-        if (playerScore > dealerScore) {
-            this.result = "player_wins"
-        } else if (playerScore < dealerScore) {
-            this.result = "dealer_wins"
-        } else {
-            this.result = "tie"
+        if (isPlayerBust && !isDealerBust) {
+            this.result = "dealer_wins";
+        } else if (isDealerBust && !isPlayerBust) {
+            this.result = "player_wins";
+        } else if (isPlayerBust && isDealerBust) {
+            this.result = "dealer_wins";
+        } else if (playerScore > dealerScore) {
+            this.result = "player_wins";
+        } else if (dealerScore > playerScore) {
+            this.result = "dealer_wins";
+        } else if (playerScore === dealerScore) {
+            this.result = "tie";
         }
     }
 

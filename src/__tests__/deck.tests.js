@@ -49,10 +49,11 @@ describe('CLASS - Deck', () => {
       expect(dealtCards.length).toBe(5);
       expect(deck.deck.length).toBe(47);
     });
-    it('returns an empty array if dealing more cards than available', () => {
+    it('throws an error when the requested number of cards exceeds the available cards', () => {
       deck.deal(52);
-      const dealtCards = deck.deal(1);
-      expect(dealtCards).toEqual([]);
+      expect(() => {
+        deck.deal(1);
+      }).toThrow("Not enough cards available");
     });
   })
 

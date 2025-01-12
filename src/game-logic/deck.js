@@ -21,10 +21,13 @@ class Deck {
     }
 }
 
-  deal(number = 1) {
-    if (number === 0) return []
-    return this.deck.splice(-number)
+deal(number = 1) {
+  if (number === 0) return [];
+  if (number > this.deck.length) {
+    throw new Error("Not enough cards available");
   }
+  return this.deck.splice(-number);
+}
 }
 
 module.exports = Deck

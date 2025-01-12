@@ -55,43 +55,17 @@ describe('CLASS - Game', () => {
     });
 
     describe('METHOD - hit', () => {
-        it('adds a card to the player’s hand', () => {
+        beforeEach(() => {
             game.dealFirstHand();
+        });
+        it('adds a card to the player’s hand', () => {
             expect(game.player.getHand().length).toBe(2);
             game.hit(game.player);
             expect(game.player.getHand().length).toBe(3);
         });
-
-        it('sets result to player_bust if player busts', () => {
-            const card1 = new Card(10, 'Spades');
-            const card2 = new Card(10, 'Hearts');
-            const card3 = new Card('Ace', 'Diamonds');
-            game.player.takeCard(card1, card2, card3);
-            expect(game.result).toBe(null);
-            game.hit(game.player);
-            expect(game.result).toBe('player_bust');
-        });
-
-        it('sets result to dealer_bust if dealer busts', () => {
-            const card1 = new Card(10, 'Hearts')
-            const card2 = new Card(6, 'Clubs')
-            game.dealer.takeCard(card1, card2)
-            const card3 = new Card(8, 'Spades')            
-            game.deck = {deal: jest.fn().mockReturnValueOnce([card3])};
-            game.hit(game.dealer);
-            expect(game.deck.deal).toHaveBeenCalledTimes(1)
-            expect(game.dealer.getScore()).toBeGreaterThan(21);
-            expect(game.dealer.isBust()).toBe(true); 
-            expect(game.result).toBe('dealer_bust');
-        });
-
-    });
-
-    describe('METHOD - stand', () => {
         it('causes the dealer to draw cards until stopping condition is met', () => {
-            game.dealFirstHand();
             expect(game.dealer.getHand().length).toBe(2);
-            game.stand(game.player);
+            game.hit(game.dealer);
             // Test dealer draws cards if hand scores < 17
             if (game.dealer.getScore() < 17) {
                 expect(game.dealer.getHand().length).toBeGreaterThan(2);
@@ -99,45 +73,84 @@ describe('CLASS - Game', () => {
             expect(game.dealer.getScore()).toBeGreaterThanOrEqual(17);
         });
 
-        it('calculates the winner after dealer finishes drawing', () => {
+    });
+
+    describe('METHOD - stand', () => {
+        let hitSpy;
+
+        beforeEach(() => {
             game.dealFirstHand();
+            hitSpy = jest.spyOn(game, 'hit');
+        });
+    
+        afterEach(() => {
+            hitSpy.mockRestore();
+        });
+        
+        it('calls hit for the dealer when player stands', () => {
+            game.stand(game.player);
+            expect(hitSpy).toHaveBeenCalledWith(game.dealer);
+        });
+
+        it('calculates the winner after dealer finishes drawing', () => {
             game.stand(game.player);
             expect(['player_wins', 'dealer_wins', 'tie']).toContain(game.result)
         });
     });
 
     describe('METHOD - calculateWinner', () => {
-        it('sets result to player_wins if player has a higher score', () => {
-            const card1 = new Card(10, 'Spades')
-            const card2 = new Card(9, 'Hearts')
-            const card3 = new Card(10, 'Clubs')
-            const card4 = new Card(8, 'Diamonds')
+
+        let card1, card2, card3, card4, card5, card6
+
+        beforeEach(() => {
+            card1 = new Card(10, 'Spades');
+            card2 = new Card(10, 'Hearts');
+            card3 = new Card(10, 'Clubs');
+            card4 = new Card(10, 'Diamonds');
+            card5 = new Card(5, 'Clubs');
+            card6 = new Card(5, 'Hearts');
+        });
+
+        it('sets result to \'player_wins\' if player has a higher non-bust score than dealer', () => {
             game.player.takeCard(card1, card2);
-            game.dealer.takeCard(card3, card4);
+            game.dealer.takeCard(card5, card6);
             game.calculateWinner();
             expect(game.result).toBe('player_wins');
         });
-
-        it('sets result to dealer_wins if dealer has a higher score', () => {
-            const card1 = new Card(10, 'Spades')
-            const card2 = new Card(8, 'Hearts')
-            const card3 = new Card(10, 'Clubs')
-            const card4 = new Card(9, 'Diamonds')
-            game.player.takeCard(card1, card2);
-            game.dealer.takeCard(card3, card4);
+    
+        it('sets result to \'dealer_wins\' if dealer has a higher non-bust score than player', () => {
+            game.player.takeCard(card5, card6);
+            game.dealer.takeCard(card1, card2);
             game.calculateWinner();
             expect(game.result).toBe('dealer_wins');
         });
-
-        it('sets result to tie if both have the same score', () => {
-            const card1 = new Card(10, 'Spades')
-            const card2 = new Card(9, 'Hearts')
-            const card3 = new Card(10, 'Clubs')
-            const card4 = new Card(9, 'Diamonds')
-            game.player.takeCard(card1, card2)
-            game.dealer.takeCard(card3, card4)
+    
+        it('sets result to \'tie\' if both have the same score and neither are bust', () => {
+            game.player.takeCard(card1, card2);
+            game.dealer.takeCard(card3, card4);
             game.calculateWinner();
             expect(game.result).toBe('tie');
+        });
+    
+        it('sets result to \'dealer_wins\' if only the player is bust', () => {
+            game.player.takeCard(card1, card2, card3);
+            game.dealer.takeCard(card4, card5);
+            game.calculateWinner();
+            expect(game.result).toBe('dealer_wins');
+        });
+    
+        it('sets result to \'player_wins\' if only the dealer is bust', () => {
+            game.player.takeCard(card1, card2);
+            game.dealer.takeCard(card3, card4, card5);
+            game.calculateWinner();
+            expect(game.result).toBe('player_wins');
+        });
+    
+        it('sets result to \'dealer_wins\' if both player and dealer are bust', () => {
+            game.player.takeCard(card1, card2, card5);
+            game.dealer.takeCard(card3, card4, card6);
+            game.calculateWinner();
+            expect(game.result).toBe('dealer_wins');
         });
     });
 

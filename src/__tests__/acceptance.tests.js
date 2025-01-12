@@ -123,14 +123,18 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
     
         it('marks the player\'s hand as bust when their score is 30', () => {
             player.takeCard(card1, card2, card3);
+            game.stand(player)
             expect(player.getScore()).toBe(30);
             expect(player.isBust()).toBe(true);
+            expect(game.result).toBe('dealer_wins')
         });
     
         it('marks the dealer\'s hand as bust when their score is 30', () => {
             dealer.takeCard(card1, card2, card3);
+            game.stand(dealer)
             expect(dealer.getScore()).toBe(30);
             expect(dealer.isBust()).toBe(true);
+            expect(game.result).toBe('player_wins')
         });
     });
 

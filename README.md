@@ -16,7 +16,7 @@ This project is an object-oriented implementation of Blackjack written in JavaSc
 
 - **`card.js`**: Defines the `Card` class, encapsulating the rank, suit, and value of a card.
 - **`deck.js`**: Implements the `Deck` class for managing a standard 52-card deck, including shuffling and dealing cards.
-- **`hand.js`**: Handles card collections for players and dealers, calculates scores, and determines if a hand is "bust."
+- **`hand.js`**: Handles card collections for players and the dealer, calculates scores, and determines if a hand is bust.
 - **`player.js`**: Represents a player, manages their hand, and checks game status (e.g., bust).
 - **`dealer.js`**: Extends `Player`, implements logic for dealer-specific actions like drawing until the score reaches 17.
 - **`game.js`**: Orchestrates the game flow, including dealing cards, handling player actions, and determining the winner.
