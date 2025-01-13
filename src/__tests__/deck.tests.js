@@ -29,7 +29,7 @@ describe('CLASS - Deck', () => {
   })
 
   describe('METHOD - deal', () => {
-    it('deals no cards when passed 0 as an argument', () => {
+    it('returns an empty array when passed 0 as an argument', () => {
       const dealtCard = deck.deal(0);
       expect(dealtCard.length).toBe(0);
       expect(deck.deck.length).toBe(52); 

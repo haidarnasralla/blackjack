@@ -28,10 +28,18 @@ class Game {
     hit(player) {
         if (player === this.dealer) {
             while (this.dealer.needsToDraw()) {
-                this.dealer.takeCard(...this.deck.deal(1))
+                this.dealer.takeCard(...this.deck.deal(1));
+                if (this.dealer.isBust()) {
+                    this.calculateWinner();
+                    return;
+                }
             }
         } else {
-            player.takeCard(...this.deck.deal(1))
+            player.takeCard(...this.deck.deal(1));
+            if (player.isBust()) {
+                this.calculateWinner();
+                return;
+            }
         }
     }
 

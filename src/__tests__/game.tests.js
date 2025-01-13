@@ -55,15 +55,27 @@ describe('CLASS - Game', () => {
     });
 
     describe('METHOD - hit', () => {
+
+        let calculateWinnerSpy, card1, card2, card3
+
         beforeEach(() => {
-            game.dealFirstHand();
+            calculateWinnerSpy = jest.spyOn(Game.prototype, 'calculateWinner');
+            card1 = (new Card(10, 'Spades'))
+            card2 = (new Card(6, 'Clubs'))
+            card3 = (new Card('King', 'Hearts'))
         });
+        afterEach(() => {
+            calculateWinnerSpy.mockRestore();
+        });
+
         it('adds a card to the player’s hand', () => {
+            game.dealFirstHand();
             expect(game.player.getHand().length).toBe(2);
             game.hit(game.player);
             expect(game.player.getHand().length).toBe(3);
         });
         it('causes the dealer to draw cards until stopping condition is met', () => {
+            game.dealFirstHand();
             expect(game.dealer.getHand().length).toBe(2);
             game.hit(game.dealer);
             // Test dealer draws cards if hand scores < 17
@@ -72,6 +84,21 @@ describe('CLASS - Game', () => {
             }
             expect(game.dealer.getScore()).toBeGreaterThanOrEqual(17);
         });
+        it('calls calculateWinner when the player draws a card which busts hand', () => {
+            game.player.takeCard(card1, card3)
+            game.hit(game.player)
+            expect(game.player.isBust()).toBe(true)
+            expect(calculateWinnerSpy).toHaveBeenCalled()
+        });
+        it('calls calculateWinner when the dealer draws a card which busts hand', () => {
+            game.dealer.takeCard(card1, card2)
+            // Mock deck to ensure dealer busts
+            game.deck = { deal: jest.fn().mockReturnValueOnce([card3]) };
+            game.hit(game.dealer)
+            expect(game.dealer.isBust()).toBe(true)
+            expect(calculateWinnerSpy).toHaveBeenCalled()
+        });
+
 
     });
 
