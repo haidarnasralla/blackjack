@@ -86,6 +86,8 @@ describe('CLASS - Game', () => {
         });
         it('calls calculateWinner when the player draws a card which busts hand', () => {
             game.player.takeCard(card1, card3)
+            // Mock deck to ensure player busts
+            game.deck = { deal: jest.fn().mockReturnValueOnce([card3]) };
             game.hit(game.player)
             expect(game.player.isBust()).toBe(true)
             expect(calculateWinnerSpy).toHaveBeenCalled()
