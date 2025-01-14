@@ -69,7 +69,8 @@ function endGame() {
       console.log('\n------\n')
       startGame();
     } else {
-      console.log('\nThanks for playing! We hope this was informative, educational and entertaining.\n');
+      console.log('\n------\n')
+      console.log('Thanks for playing! We hope this was informative, educational and entertaining.\n');
       rl.close();
     }
   })
