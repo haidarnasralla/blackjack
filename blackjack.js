@@ -9,10 +9,15 @@ const rl = readline.createInterface({
 let game;
 
 function displayState() {
+  const dealerHand = game.dealer.getHand();
+  const playerScore = game.player.getScore();
   console.log(`* Your cards: ${game.player.getHand().map(card => card.toString()).join(', ')}`);
   console.log(`* Your score: ${game.player.getScore()}\n`);
-  const dealerHand = game.dealer.getHand();
+  if (playerScore === 21) {
+    console.log("### You have a Blackjack! ###\n");
+}
   console.log(`* Dealer's visible card: ${dealerHand[0].toString()}\n`);
+  console.log(`Remaining cards in deck: ${game.deck.deck.length}\n`);
 }
 
 function askPlayerAction() {
@@ -24,7 +29,7 @@ function askPlayerAction() {
       return;
     }
     if (answer.toLowerCase() === 'h') {
-      console.log('You decided to HIT!');
+      console.log('You decided to hit!');
       console.log('\n------\n');
       game.hit(game.player);
       if (game.player.isBust()) {
@@ -36,7 +41,7 @@ function askPlayerAction() {
         askPlayerAction();
       }
     } else if (answer.toLowerCase() === 's') {
-      console.log('You decided to STAND!');
+      console.log('You decided to stand!');
       console.log('\n------\n');
       game.stand(game.player);
       endGame();
