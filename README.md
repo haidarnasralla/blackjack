@@ -11,6 +11,7 @@ This project is an object-oriented implementation of Blackjack written in JavaSc
 - Accurate scoring rules, including dynamic Ace value adjustment.
 - Comprehensive game logic with hit and stand functionality.
 - Automated testing for all components and acceptance scenarios.
+- A command line interface for an interactive Blackjack experience.
 
 ### Key Components
 
@@ -20,6 +21,7 @@ This project is an object-oriented implementation of Blackjack written in JavaSc
 - **`player.js`**: Represents a player, manages their hand, and checks game status (e.g., bust).
 - **`dealer.js`**: Extends `Player`, implements logic for dealer-specific actions like drawing until the score reaches 17.
 - **`game.js`**: Orchestrates the game flow, including dealing cards, handling player actions, and determining the winner.
+- **`blackjack.js`**: A CLI that allows players to interact with the game in the terminal.
 
 ## Installation
 
@@ -35,6 +37,14 @@ This project is an object-oriented implementation of Blackjack written in JavaSc
    ```bash
    npm install
    ```
+
+## Running the CLI
+
+To play the game in the terminal, run:
+
+```bash
+node blackjack.js
+```
 
 ### Tests
 
