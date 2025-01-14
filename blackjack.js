@@ -56,9 +56,9 @@ function endGame() {
   console.log(`* Dealer's score: ${game.dealer.getScore()}\n`);
 
   if (game.result === 'player_wins') {
-    console.log('Congratulations! You win!');
+    console.log('Congratulations - you win! Radio 4\'s Thought for the Day: \"Success often comes to those who know when to hold back... or when to say, \'Hit me.\'"');
   } else if (game.result === 'dealer_wins') {
-    console.log('Dealer wins - too bad!');
+    console.log('BBC wins! Coming up next: I\'m Sorry, I Haven\'t a Clue - Blackjack Edition.');
   } else if (game.result === 'tie') {
     console.log("It's a tie!");
   }
@@ -79,8 +79,9 @@ function endGame() {
 
 function startGame() {
   game = new Game();
-  console.log('*** WELCOME TO BIG BUCKS CASINO! ***\n');
-  console.log('*** Let\'s play Blackjack! ***');
+  console.log('*** WELCOME TO BIG BUCKS CASINO! ***');
+  console.log('*** News at 10 - Bankrupt by 11! ***\n');
+  console.log('...let\'s play Blackjack!');
   console.log('\n------\n');
   game.startGame();
   displayState();
