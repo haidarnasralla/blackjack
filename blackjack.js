@@ -8,7 +8,7 @@ const rl = readline.createInterface({
 
 let game;
 
-function displayState() {
+const displayState = () => {
   const dealerHand = game.dealer.getHand();
   const playerScore = game.player.getScore();
   console.log(`* Your cards: ${game.player.getHand().map(card => card.toString()).join(', ')}`);
@@ -21,7 +21,7 @@ function displayState() {
   console.log(`Remaining cards in deck: ${game.deck.deck.length}\n`);
 }
 
-function askPlayerAction() {
+const askPlayerAction = () => {
   rl.question('HIT (h), STAND (s) or QUIT (q)? ', answer => {
     console.log('\n------\n');
     if (answer.toLowerCase() === 'q') {
@@ -54,7 +54,7 @@ function askPlayerAction() {
   });
 }
 
-function endGame() {
+const endGame = () => {
   console.log('FINAL RESULTS:\n');
   console.log(`* Your cards: ${game.player.getHand().map(card => card.toString()).join(', ')}`);
   console.log(`* Your score: ${game.player.getScore()}\n`);
@@ -71,7 +71,7 @@ function endGame() {
   promptRestart() 
 }
 
-function promptRestart() {
+const promptRestart = () => {
   rl.question('\nPlay again? (y / n)', answer => {
     if (answer.toLowerCase() === 'y') {
       game = new Game();
@@ -89,7 +89,7 @@ function promptRestart() {
   })
 }
 
-function startGame() {
+const startGame = () => {
   game = new Game();
   console.log('*** WELCOME TO BIG BUCKS CASINO! ***');
   console.log('*** News at 10 - Bankrupt by 11! ***\n');
