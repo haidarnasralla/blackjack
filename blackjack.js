@@ -14,7 +14,8 @@ function displayState() {
   console.log(`* Your cards: ${game.player.getHand().map(card => card.toString()).join(', ')}`);
   console.log(`* Your score: ${game.player.getScore()}\n`);
   if (playerScore === 21) {
-    console.log("### You have a Blackjack! ###\n");
+    console.log("=== You have a Blackjack! ===\n");
+    console.log("# WARNING: Hitting again will bust your hand! #\n");
 }
   console.log(`* Dealer's visible card: ${dealerHand[0].toString()}\n`);
   console.log(`Remaining cards in deck: ${game.deck.deck.length}\n`);
@@ -67,19 +68,25 @@ function endGame() {
   } else if (game.result === 'tie') {
     console.log("It's a tie!");
   }
+  promptRestart() 
+}
 
+function promptRestart() {
   rl.question('\nPlay again? (y / n)', answer => {
     if (answer.toLowerCase() === 'y') {
       game = new Game();
       console.log('\n------\n')
       startGame();
-    } else {
+    } else if (answer.toLowerCase() === 'n') {
       console.log('\n------\n')
       console.log('Thanks for playing! We hope this was informative, educational and entertaining.\n');
       rl.close();
+    } else {
+      console.log('\nInvalid input. Please type "y" to play again or "n" to quit.');
+      console.log('\n------\n');
+      promptRestart()
     }
   })
-    
 }
 
 function startGame() {
