@@ -4,6 +4,7 @@ const Card = require('../game-logic/card');
 describe('CLASS - Hand', () => {
 
   let hand, card1, card2, card3, card4, card5, card6, card7
+  
   beforeEach(() => {
     hand = new Hand();
     card1 = new Card(2, 'Hearts');
@@ -126,4 +127,5 @@ describe('CLASS - Hand', () => {
       expect(hand.isBust()).toBe(true);
     });
   })
+
 });

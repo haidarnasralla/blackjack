@@ -5,6 +5,7 @@ const Card = require('../game-logic/card');
 const Deck = require('../game-logic/deck');
 
 describe('CLASS - Game', () => {
+    
     let game;
 
     beforeEach(() => {

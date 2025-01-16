@@ -25,7 +25,8 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
     });
 
     describe('2. Given I have a valid hand of cards, when I choose to "hit", then I receive another card and my score is updated', () => {
-        let card1, card2
+
+        let card1, card2, card3
     
         beforeEach(() => {
             card1 = new Card(10, 'Spades');
@@ -61,6 +62,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
     
 
     describe('3. Given I have a valid hand of cards, when I choose to "stand", then I receive no further cards and my score is evaluated', () => {
+
         let card1, card2, calculateWinnerSpy
     
         beforeEach(() => {
@@ -91,6 +93,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
     });
 
     describe('4. Given my score is updated or evaluated, when it is 21 or less, then I have a valid hand', () => {
+
         let card1, card2
     
         beforeEach(() => {
@@ -113,6 +116,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
 
     
     describe('5. Given my score is updated, when it is 22 or more, then I am "bust" and do not have a valid hand', () => {
+
         let card1, card2, card3
     
         beforeEach(() => {
@@ -139,6 +143,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
     });
 
     describe('6. Given I have a king and an ace, when my score is evaluated, then my score is 21', () => {
+
         let card1, card2
     
         beforeEach(() => {
@@ -158,6 +163,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
     });
 
     describe('7. Given I have a king, a queen, and an ace, when my score is evaluated, then my score is 21', () => {
+
         let card1, card2, card3
     
         beforeEach(() => {
@@ -178,6 +184,7 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
     });
 
     describe('8. Given I have a nine, an ace, and another ace, when my score is evaluated, then my score is 21', () => {
+
         let card1, card2, card3
     
         beforeEach(() => {
@@ -196,4 +203,5 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
             expect(dealer.getScore()).toBe(21);
         });
     });
+
 });

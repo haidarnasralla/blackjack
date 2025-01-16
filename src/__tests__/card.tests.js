@@ -37,4 +37,5 @@ describe('CLASS: Card', () => {
             expect(card.toString()).toBe('King of Hearts')
         });
     })
+    
 });

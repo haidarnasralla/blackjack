@@ -2,6 +2,7 @@ const Player = require('../game-logic/player');
 const Card = require('../game-logic/card');
 
 describe('CLASS - Player', () => {
+    
     let player;
 
     beforeEach(() => {
@@ -99,4 +100,5 @@ describe('CLASS - Player', () => {
             expect(player.isBust()).toBe(true);
         });
     });
+
 });

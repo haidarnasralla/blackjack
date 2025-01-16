@@ -2,6 +2,7 @@ const Dealer = require('../game-logic/dealer');
 const Card = require('../game-logic/card');
 
 describe('CLASS - Dealer', () => {
+
     let dealer;
 
     beforeEach(() => {
@@ -66,4 +67,5 @@ describe('CLASS - Dealer', () => {
             expect(dealer.needsToDraw()).toBe(false);
         });
     });
+    
 });

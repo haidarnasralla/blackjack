@@ -20,15 +20,16 @@ class Deck {
         const j = Math.floor(Math.random() * (i + 1));
         [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]]
     }
-}
-
-deal(number = 1) {
-  if (number === 0) return [];
-  if (number > this.deck.length) {
-    throw new Error("Not enough cards available");
   }
-  return this.deck.splice(-number);
-}
+
+  deal(number = 1) {
+   if (number === 0) return [];
+   if (number > this.deck.length) {
+      throw new Error("Not enough cards available");
+    }
+   return this.deck.splice(-number);
+  }
+
 }
 
 module.exports = Deck
