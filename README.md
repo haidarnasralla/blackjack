@@ -43,7 +43,7 @@ This project is an object-oriented implementation of Blackjack written in JavaSc
 To play the game in the terminal, run:
 
 ```bash
-node blackjack.js
+npm start
 ```
 
 ### Tests
