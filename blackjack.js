@@ -38,7 +38,7 @@ const handleAction = (answer) => {
   const lowerAnswer = answer.toLowerCase();
 
   if (lowerAnswer === 'q') {
-    console.log('Thanks for playing!\n');
+    console.log('Thanks for playing! We hope this was informative, educational and entertaining.\n');
     rl.close();
     return;
   }
