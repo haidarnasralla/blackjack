@@ -46,7 +46,6 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
             expect(hand.length).toBe(3)
             expect(player.getScore()).toBe(21)
         });
-    
         it('updates the dealers\'s hand and score after hitting', () => {
             const hand = dealer.getHand()
             dealer.takeCard(card1, card2);
@@ -82,7 +81,6 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
             expect(player.getScore()).toBe(20)
             expect(calculateWinnerSpy).toHaveBeenCalled();
         });
-    
         it('keeps the dealer\'s hand unchanged and evaluates their score after standing', () => {
             dealer.takeCard(card1, card2);
             game.stand(dealer);
@@ -106,7 +104,6 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
             expect(player.getScore()).toBe(20);
             expect(player.isBust()).toBe(false);
         });
-    
         it('marks the dealer\'s hand as valid when their score is 20', () => {
             dealer.takeCard(card1, card2);
             expect(dealer.getScore()).toBe(20);
@@ -132,7 +129,6 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
             expect(player.isBust()).toBe(true);
             expect(game.result).toBe('dealer_wins')
         });
-    
         it('marks the dealer\'s hand as bust when their score is 30, sets result to \'player_wins\' on standing', () => {
             dealer.takeCard(card1, card2, card3);
             game.stand(dealer)
@@ -155,7 +151,6 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
             player.takeCard(card1, card2);
             expect(player.getScore()).toBe(21);
         });
-    
         it('calculates the dealer\'s score as 21 when holding a king and an ace', () => {
             dealer.takeCard(card1, card2);
             expect(dealer.getScore()).toBe(21);
@@ -176,7 +171,6 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
             player.takeCard(card1, card2, card3);
             expect(player.getScore()).toBe(21);
         });
-    
         it('calculates the dealer\'s score as 21 when holding a king, a queen, and an ace', () => {
             dealer.takeCard(card1, card2, card3);
             expect(dealer.getScore()).toBe(21);
@@ -197,7 +191,6 @@ describe('ACCEPTANCE TESTS - Blackjack Scenarios', () => {
             player.takeCard(card1, card2, card3);
             expect(player.getScore()).toBe(21);
         });
-    
         it('calculates the dealer\'s score as 21 when holding a nine, an ace, and another ace', () => {
             dealer.takeCard(card1, card2, card3);
             expect(dealer.getScore()).toBe(21);

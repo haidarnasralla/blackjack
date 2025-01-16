@@ -16,14 +16,12 @@ describe('CLASS - Dealer', () => {
     });
 
     describe('METHOD - needsToDraw', () => {
-
         it('returns true when hand is empty', () => {
             const dealerHand = dealer.getHand()
             expect(dealerHand.length).toBe(0);
             expect(dealer.getScore()).toBe(0);
             expect(dealer.needsToDraw()).toBe(true);
         });
-
         it('returns true when hand score is 16', () => {
             const card1 = new Card(10, 'Clubs');
             const card2 = new Card(6, 'Diamonds');
@@ -31,7 +29,6 @@ describe('CLASS - Dealer', () => {
             expect(dealer.getScore()).toBe(16);
             expect(dealer.needsToDraw()).toBe(true);
         });
-
         it('returns false when the hand score is 17', () => {
             const card1 = new Card(10, 'Hearts');
             const card2 = new Card(7, 'Diamonds');
@@ -39,7 +36,6 @@ describe('CLASS - Dealer', () => {
             expect(dealer.getScore()).toBe(17);
             expect(dealer.needsToDraw()).toBe(false);
         });
-
         it('returns false when the hand score is greater than 17', () => {
             const card1 = new Card(10, 'Hearts');
             const card2 = new Card(8, 'Clubs');
@@ -47,7 +43,6 @@ describe('CLASS - Dealer', () => {
             expect(dealer.getScore()).toBe(18);
             expect(dealer.needsToDraw()).toBe(false);
         });
-
         it('correctly adjusts Ace values and stops drawing at 17', () => {
             // Start with Ace and 4
             const card1 = new Card('Ace', 'Hearts');

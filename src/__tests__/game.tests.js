@@ -106,6 +106,7 @@ describe('CLASS - Game', () => {
     });
 
     describe('METHOD - stand', () => {
+
         let hitSpy;
 
         beforeEach(() => {
@@ -121,7 +122,6 @@ describe('CLASS - Game', () => {
             game.stand(game.player);
             expect(hitSpy).toHaveBeenCalledWith(game.dealer);
         });
-
         it('calculates the winner after dealer finishes drawing', () => {
             game.stand(game.player);
             expect(['player_wins', 'dealer_wins', 'tie']).toContain(game.result)
@@ -147,35 +147,30 @@ describe('CLASS - Game', () => {
             game.calculateWinner();
             expect(game.result).toBe('player_wins');
         });
-    
         it('sets result to \'dealer_wins\' if dealer has a higher non-bust score than player', () => {
             game.player.takeCard(card5, card6);
             game.dealer.takeCard(card1, card2);
             game.calculateWinner();
             expect(game.result).toBe('dealer_wins');
-        });
-    
+        }); 
         it('sets result to \'tie\' if both have the same score and neither are bust', () => {
             game.player.takeCard(card1, card2);
             game.dealer.takeCard(card3, card4);
             game.calculateWinner();
             expect(game.result).toBe('tie');
         });
-    
         it('sets result to \'dealer_wins\' if only the player is bust', () => {
             game.player.takeCard(card1, card2, card3);
             game.dealer.takeCard(card4, card5);
             game.calculateWinner();
             expect(game.result).toBe('dealer_wins');
         });
-    
         it('sets result to \'player_wins\' if only the dealer is bust', () => {
             game.player.takeCard(card1, card2);
             game.dealer.takeCard(card3, card4, card5);
             game.calculateWinner();
             expect(game.result).toBe('player_wins');
         });
-    
         it('sets result to \'dealer_wins\' if both player and dealer are bust', () => {
             game.player.takeCard(card1, card2, card5);
             game.dealer.takeCard(card3, card4, card6);

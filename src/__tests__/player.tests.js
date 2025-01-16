@@ -13,7 +13,6 @@ describe('CLASS - Player', () => {
         it('sets the player name upon instantiation', () => {
             expect(player.name).toBe('John Reith');
         });
-
         it('defaults to "Player" if no name is provided', () => {
             const defaultPlayer = new Player();
             expect(defaultPlayer.name).toBe('Player');
@@ -42,7 +41,6 @@ describe('CLASS - Player', () => {
             expect(hand.length).toBe(1);
             expect(hand[0]).toBe(card1);
         });
-
         it('adds multiple cards to the player\'s hand', () => {
             player.takeCard(card1, card2);
             const hand = player.getHand();
@@ -65,7 +63,6 @@ describe('CLASS - Player', () => {
     });
 
     describe('METHOD - getScore', () => {
-        
         it('returns 21 when player\'s hand contains cards \'10 of Hearts\' and \'Ace of Diamonds\'', () => {
             const card1 = new Card(10, 'Hearts');
             const card2 = new Card('Ace', 'Diamonds');
@@ -89,12 +86,10 @@ describe('CLASS - Player', () => {
             player.takeCard(card1, card2);
             expect(player.isBust()).toBe(false);
         });
-
         it('returns false when player\'s hand score is 21', () => {
             player.takeCard(card1, card2, card3);
             expect(player.isBust()).toBe(false);
         });
-
         it('returns true when player\'s hand score 22', () => {
             player.takeCard(card1, card2, card4);
             expect(player.isBust()).toBe(true);
