@@ -21,37 +21,44 @@ const displayState = () => {
   console.log(`Remaining cards in deck: ${game.deck.deck.length}\n`);
 }
 
-const askPlayerAction = () => {
-  rl.question('HIT (h), STAND (s) or QUIT (q)? ', answer => {
+const promptPlayerAction = () => {
+  rl.question('HIT (h), STAND (s) or QUIT (q)? ', (answer) => {
     console.log('\n------\n');
-    if (answer.toLowerCase() === 'q') {
-      console.log('Thanks for playing!\n');
-      rl.close();
-      return;
-    }
-    if (answer.toLowerCase() === 'h') {
-      console.log('You decided to hit!');
+    handlePlayerAction(answer);
+  });
+};
+
+const handlePlayerAction = (answer) => {
+  const lowerAnswer = answer.toLowerCase();
+
+  if (lowerAnswer === 'q') {
+    console.log('Thanks for playing!\n');
+    rl.close();
+    return;
+  }
+
+  if (lowerAnswer === 'h') {
+    console.log('You decided to hit!');
+    console.log('\n------\n');
+    game.hit(game.player);
+    if (game.player.isBust()) {
+      console.log('Yikes! YOU\'RE BUST!');
       console.log('\n------\n');
-      game.hit(game.player);
-      if (game.player.isBust()) {
-        console.log('Yikes! YOU\'RE BUST!');
-        console.log('\n------\n');
-        endGame();
-      } else {
-        displayState();
-        askPlayerAction();
-      }
-    } else if (answer.toLowerCase() === 's') {
-      console.log('You decided to stand!');
-      console.log('\n------\n');
-      game.stand(game.player);
       endGame();
     } else {
-      console.log('Invalid input. Please type "h" to hit, "s" to stand or "q" to quit.');
-      console.log('\n------\n');
-      askPlayerAction();
+      displayState();
+      promptPlayerAction();
     }
-  });
+  } else if (lowerAnswer === 's') {
+    console.log('You decided to stand!');
+    console.log('\n------\n');
+    game.stand(game.player);
+    endGame();
+  } else {
+    console.log('Invalid input. Please type "h" to hit, "s" to stand or "q" to quit.');
+    console.log('\n------\n');
+    promptPlayerAction();
+  }
 }
 
 const endGame = () => {
@@ -64,7 +71,7 @@ const endGame = () => {
   if (game.result === 'player_wins') {
     console.log('Congratulations - you win! Radio 4\'s Thought for the Day: \"Success often comes to those who know when to hold back... or when to say, \'Hit me.\'"');
   } else if (game.result === 'dealer_wins') {
-    console.log('BBC wins! Coming up next: I\'m Sorry, I Haven\'t a Clue - Blackjack Edition.');
+    console.log('BBC wins! Coming up next: I\'m Sorry, I Haven\'t a Clue - Blackjack Edition.');
   } else if (game.result === 'tie') {
     console.log("It's a tie!");
   }
@@ -83,7 +90,7 @@ const promptRestart = () => {
       rl.close();
     } else {
       console.log('\nInvalid input. Please type "y" to play again or "n" to quit.');
-      console.log('\n------\n');
+      console.log('\n------');
       promptRestart()
     }
   })
@@ -97,7 +104,7 @@ const startGame = () => {
   console.log('\n------\n');
   game.startGame();
   displayState();
-  askPlayerAction();
+  promptPlayerAction();
 }
 
 startGame();
