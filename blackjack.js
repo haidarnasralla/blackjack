@@ -9,26 +9,32 @@ const rl = readline.createInterface({
 let game;
 
 const displayState = () => {
+
   const dealerHand = game.dealer.getHand();
   const playerScore = game.player.getScore();
+
   console.log(`* Your cards: ${game.player.getHand().map(card => card.toString()).join(', ')}`);
   console.log(`* Your score: ${game.player.getScore()}\n`);
+
   if (playerScore === 21) {
     console.log("=== You have a Blackjack! ===\n");
     console.log("# WARNING: Hitting again will bust your hand! #\n");
 }
+
   console.log(`* Dealer's visible card: ${dealerHand[0].toString()}\n`);
   console.log(`Remaining cards in deck: ${game.deck.deck.length}\n`);
+
 }
 
-const promptPlayerAction = () => {
+const promptAction = () => {
   rl.question('HIT (h), STAND (s) or QUIT (q)? ', (answer) => {
     console.log('\n------\n');
-    handlePlayerAction(answer);
+    handleAction(answer);
   });
 };
 
-const handlePlayerAction = (answer) => {
+const handleAction = (answer) => {
+
   const lowerAnswer = answer.toLowerCase();
 
   if (lowerAnswer === 'q') {
@@ -47,7 +53,7 @@ const handlePlayerAction = (answer) => {
       endGame();
     } else {
       displayState();
-      promptPlayerAction();
+      promptAction();
     }
   } else if (lowerAnswer === 's') {
     console.log('You decided to stand!');
@@ -57,11 +63,13 @@ const handlePlayerAction = (answer) => {
   } else {
     console.log('Invalid input. Please type "h" to hit, "s" to stand or "q" to quit.');
     console.log('\n------\n');
-    promptPlayerAction();
+    promptAction();
   }
+
 }
 
 const endGame = () => {
+
   console.log('FINAL RESULTS:\n');
   console.log(`* Your cards: ${game.player.getHand().map(card => card.toString()).join(', ')}`);
   console.log(`* Your score: ${game.player.getScore()}\n`);
@@ -76,16 +84,23 @@ const endGame = () => {
     console.log("It's a tie!");
   }
   promptRestart() 
+
 }
 
 const promptRestart = () => {
   rl.question('\nPlay again? (y / n)', answer => {
-    if (answer.toLowerCase() === 'y') {
-      game = new Game();
-      console.log('\n------\n')
+    handleRestart(answer)
+  })
+};
+
+const handleRestart = (answer) => {
+
+    const lowerAnswer = answer.toLowerCase();
+
+    console.log('\n------\n')
+    if (lowerAnswer === 'y') {
       startGame();
-    } else if (answer.toLowerCase() === 'n') {
-      console.log('\n------\n')
+    } else if (lowerAnswer === 'n') {
       console.log('Thanks for playing! We hope this was informative, educational and entertaining.\n');
       rl.close();
     } else {
@@ -93,18 +108,22 @@ const promptRestart = () => {
       console.log('\n------');
       promptRestart()
     }
-  })
+
 }
 
-const startGame = () => {
-  game = new Game();
+const welcomeMessage = () => {
   console.log('*** WELCOME TO BIG BUCKS CASINO! ***');
   console.log('*** News at 10 - Bankrupt by 11! ***\n');
   console.log('...let\'s play Blackjack!');
   console.log('\n------\n');
-  game.startGame();
-  displayState();
-  promptPlayerAction();
 }
 
+const startGame = () => {
+  game = new Game();
+  game.startGame();
+  displayState();
+  promptAction();
+}
+
+welcomeMessage();
 startGame();
